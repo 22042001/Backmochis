@@ -10,6 +10,11 @@ use App\Http\Controllers\Api\ComentarioController;
 use App\Http\Controllers\Api\ForoTemaController;
 use App\Http\Controllers\Api\ForoRespuestaController;
 use App\Http\Controllers\Api\ValoracionController;
+use App\Http\Controllers\AuthController;
+
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
+Route::middleware('auth:api')->get('me', [AuthController::class, 'me']);
 
 // Rutas para RolController
 Route::get('/roles', [RolController::class, 'index']);
