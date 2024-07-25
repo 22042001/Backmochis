@@ -17,14 +17,9 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_rol' => 'required|exists:roles,id_rol',
-            'nombre' => 'required|max:100',
-            'apellido' => 'max:100',
-            'email' => 'required|email|unique:usuarios,email',
-            'contraseña' => 'required|min:6',
-            'fecha_nacimiento' => 'date',
-            'genero' => 'max:20',
-            'foto_perfil' => 'max:200',
+            'nombre' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:usuarios',
+            'password' => 'required|string|min:8',
         ]);
 
         $usuario = Usuario::create($request->all());
@@ -39,18 +34,14 @@ class UsuarioController extends Controller
 
     public function update(Request $request, $id)
     {
+        $usuario = Usuario::findOrFail($id);
+
         $request->validate([
-            'id_rol' => 'exists:roles,id_rol',
-            'nombre' => 'max:100',
-            'apellido' => 'max:100',
-            'email' => 'email|unique:usuarios,email,'.$id.',id_usuario',
-            'contraseña' => 'min:6',
-            'fecha_nacimiento' => 'date',
-            'genero' => 'max:20',
-            'foto_perfil' => 'max:200',
+            'nombre' => 'string|max:255',
+            'email' => 'string|email|max:255|unique:usuarios,email,' . $id,
+            'password' => 'string|min:8',
         ]);
 
-        $usuario = Usuario::findOrFail($id);
         $usuario->update($request->all());
         return response()->json($usuario);
     }

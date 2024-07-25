@@ -17,8 +17,8 @@ class DestinoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_pais' => 'required|exists:paises,id_pais',
-            'nombre' => 'required|max:100',
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string',
         ]);
 
         $destino = Destino::create($request->all());
@@ -33,12 +33,13 @@ class DestinoController extends Controller
 
     public function update(Request $request, $id)
     {
+        $destino = Destino::findOrFail($id);
+
         $request->validate([
-            'id_pais' => 'exists:paises,id_pais',
-            'nombre' => 'max:100',
+            'nombre' => 'string|max:255',
+            'descripcion' => 'string',
         ]);
 
-        $destino = Destino::findOrFail($id);
         $destino->update($request->all());
         return response()->json($destino);
     }

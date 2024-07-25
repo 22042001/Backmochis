@@ -19,8 +19,8 @@ class ValoracionController extends Controller
         $request->validate([
             'id_experiencia' => 'required|exists:experiencias,id_experiencia',
             'id_usuario' => 'required|exists:usuarios,id_usuario',
-            'puntuacion' => 'required|integer|min:1|max:5',
-            'comentario_breve' => 'max:200',
+            'puntuacion' => 'required|integer|min:1|max:10',
+            'comentario' => 'required|string',
         ]);
 
         $valoracion = Valoracion::create($request->all());
@@ -35,14 +35,15 @@ class ValoracionController extends Controller
 
     public function update(Request $request, $id)
     {
+        $valoracion = Valoracion::findOrFail($id);
+
         $request->validate([
             'id_experiencia' => 'exists:experiencias,id_experiencia',
             'id_usuario' => 'exists:usuarios,id_usuario',
-            'puntuacion' => 'integer|min:1|max:5',
-            'comentario_breve' => 'max:200',
+            'puntuacion' => 'integer|min:1|max:10',
+            'comentario' => 'string',
         ]);
 
-        $valoracion = Valoracion::findOrFail($id);
         $valoracion->update($request->all());
         return response()->json($valoracion);
     }

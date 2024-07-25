@@ -1,71 +1,75 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\RolController;
+use App\Http\Controllers\Api\UsuarioController;
+use App\Http\Controllers\Api\PaisController;
+use App\Http\Controllers\Api\DestinoController;
+use App\Http\Controllers\Api\ExperienciaController;
+use App\Http\Controllers\Api\ComentarioController;
+use App\Http\Controllers\Api\ForoTemaController;
+use App\Http\Controllers\Api\ForoRespuestaController;
+use App\Http\Controllers\Api\ValoracionController;
 
-// Ruta de prueba
-Route::get('/test', function () {
-    return response()->json(['message' => 'API is working!']);
-});
+// Rutas para RolController
+Route::get('/roles', [RolController::class, 'index']);
+Route::post('/roles', [RolController::class, 'store']);
+Route::get('/roles/{id}', [RolController::class, 'show']);
+Route::put('/roles/{id}', [RolController::class, 'update']);
+Route::delete('/roles/{id}', [RolController::class, 'destroy']);
 
-// Rutas para el controlador RolController
-Route::get('/rol', 'App\Http\Controllers\Api\RolController@index');
-Route::post('/rol', 'App\Http\Controllers\Api\RolController@store');
-Route::get('/roles/{id}', 'App\Http\Controllers\Api\RolController@show');
-Route::put('/roles/{id}', 'App\Http\Controllers\Api\RolController@update');
-Route::delete('/roles/{id}', 'App\Http\Controllers\Api\RolController@destroy');
+// Rutas para UsuarioController
+Route::get('/usuarios', [UsuarioController::class, 'index']);
+Route::post('/usuarios', [UsuarioController::class, 'store']);
+Route::get('/usuarios/{id}', [UsuarioController::class, 'show']);
+Route::put('/usuarios/{id}', [UsuarioController::class, 'update']);
+Route::delete('/usuarios/{id}', [UsuarioController::class, 'destroy']);
 
-// Rutas para el controlador UsuarioController
-Route::get('/usuarios', 'App\Http\Controllers\Api\UsuarioController@index');
-Route::post('/usuarios', 'App\Http\Controllers\Api\UsuarioController@store');
-Route::get('/usuarios/{id}', 'App\Http\Controllers\Api\UsuarioController@show');
-Route::put('/usuarios/{id}', 'App\Http\Controllers\Api\UsuarioController@update');
-Route::delete('/usuarios/{id}', 'App\Http\Controllers\Api\UsuarioController@destroy');
+// Rutas para PaisController
+Route::get('/paises', [PaisController::class, 'index']);
+Route::post('/paises', [PaisController::class, 'store']);
+Route::get('/paises/{id}', [PaisController::class, 'show']);
+Route::put('/paises/{id}', [PaisController::class, 'update']);
+Route::delete('/paises/{id}', [PaisController::class, 'destroy']);
 
-// Rutas para el controlador PaisController
-Route::get('/paises', 'App\Http\Controllers\Api\PaisController@index');
-Route::post('/paises', 'App\Http\Controllers\Api\PaisController@store');
-Route::get('/paises/{id}', 'App\Http\Controllers\Api\PaisController@show');
-Route::put('/paises/{id}', 'App\Http\Controllers\Api\PaisController@update');
-Route::delete('/paises/{id}', 'App\Http\Controllers\Api\PaisController@destroy');
+// Rutas para DestinoController
+Route::get('/destinos', [DestinoController::class, 'index']);
+Route::post('/destinos', [DestinoController::class, 'store']);
+Route::get('/destinos/{id}', [DestinoController::class, 'show']);
+Route::put('/destinos/{id}', [DestinoController::class, 'update']);
+Route::delete('/destinos/{id}', [DestinoController::class, 'destroy']);
 
-// Rutas para el controlador DestinoController
-Route::get('/destinos', 'App\Http\Controllers\Api\DestinoController@index');
-Route::post('/destinos', 'App\Http\Controllers\Api\DestinoController@store');
-Route::get('/destinos/{id}', 'App\Http\Controllers\Api\DestinoController@show');
-Route::put('/destinos/{id}', 'App\Http\Controllers\Api\DestinoController@update');
-Route::delete('/destinos/{id}', 'App\Http\Controllers\Api\DestinoController@destroy');
+// Rutas para ExperienciaController
+Route::get('/experiencias', [ExperienciaController::class, 'index']);
+Route::post('/experiencias', [ExperienciaController::class, 'store']);
+Route::get('/experiencias/{id}', [ExperienciaController::class, 'show']);
+Route::put('/experiencias/{id}', [ExperienciaController::class, 'update']);
+Route::delete('/experiencias/{id}', [ExperienciaController::class, 'destroy']);
 
-// Rutas para el controlador ExperienciaController
-Route::get('/experiencias', 'App\Http\Controllers\Api\ExperienciaController@index');
-Route::post('/experiencias', 'App\Http\Controllers\Api\ExperienciaController@store');
-Route::get('/experiencias/{id}', 'App\Http\Controllers\Api\ExperienciaController@show');
-Route::put('/experiencias/{id}', 'App\Http\Controllers\Api\ExperienciaController@update');
-Route::delete('/experiencias/{id}', 'App\Http\Controllers\Api\ExperienciaController@destroy');
+// Rutas para ComentarioController
+Route::get('/comentarios', [ComentarioController::class, 'index']);
+Route::post('/comentarios', [ComentarioController::class, 'store']);
+Route::get('/comentarios/{id}', [ComentarioController::class, 'show']);
+Route::put('/comentarios/{id}', [ComentarioController::class, 'update']);
+Route::delete('/comentarios/{id}', [ComentarioController::class, 'destroy']);
 
-// Rutas para el controlador ComentarioController
-Route::get('/comentarios', 'App\Http\Controllers\Api\ComentarioController@index');
-Route::post('/comentarios', 'App\Http\Controllers\Api\ComentarioController@store');
-Route::get('/comentarios/{id}', 'App\Http\Controllers\Api\ComentarioController@show');
-Route::put('/comentarios/{id}', 'App\Http\Controllers\Api\ComentarioController@update');
-Route::delete('/comentarios/{id}', 'App\Http\Controllers\Api\ComentarioController@destroy');
+// Rutas para ForoTemaController
+Route::get('/foro-temas', [ForoTemaController::class, 'index']);
+Route::post('/foro-temas', [ForoTemaController::class, 'store']);
+Route::get('/foro-temas/{id}', [ForoTemaController::class, 'show']);
+Route::put('/foro-temas/{id}', [ForoTemaController::class, 'update']);
+Route::delete('/foro-temas/{id}', [ForoTemaController::class, 'destroy']);
 
-// Rutas para el controlador ForoTemaController
-Route::get('/foro-temas', 'App\Http\Controllers\Api\ForoTemaController@index');
-Route::post('/foro-temas', 'App\Http\Controllers\Api\ForoTemaController@store');
-Route::get('/foro-temas/{id}', 'App\Http\Controllers\Api\ForoTemaController@show');
-Route::put('/foro-temas/{id}', 'App\Http\Controllers\Api\ForoTemaController@update');
-Route::delete('/foro-temas/{id}', 'App\Http\Controllers\Api\ForoTemaController@destroy');
+// Rutas para ForoRespuestaController
+Route::get('/foro-respuestas', [ForoRespuestaController::class, 'index']);
+Route::post('/foro-respuestas', [ForoRespuestaController::class, 'store']);
+Route::get('/foro-respuestas/{id}', [ForoRespuestaController::class, 'show']);
+Route::put('/foro-respuestas/{id}', [ForoRespuestaController::class, 'update']);
+Route::delete('/foro-respuestas/{id}', [ForoRespuestaController::class, 'destroy']);
 
-// Rutas para el controlador ForoRespuestaController
-Route::get('/foro-respuestas', 'App\Http\Controllers\Api\ForoRespuestaController@index');
-Route::post('/foro-respuestas', 'App\Http\Controllers\Api\ForoRespuestaController@store');
-Route::get('/foro-respuestas/{id}', 'App\Http\Controllers\Api\ForoRespuestaController@show');
-Route::put('/foro-respuestas/{id}', 'App\Http\Controllers\Api\ForoRespuestaController@update');
-Route::delete('/foro-respuestas/{id}', 'App\Http\Controllers\Api\ForoRespuestaController@destroy');
-
-// Rutas para el controlador ValoracionController
-Route::get('/valoraciones', 'App\Http\Controllers\Api\ValoracionController@index');
-Route::post('/valoraciones', 'App\Http\Controllers\Api\ValoracionController@store');
-Route::get('/valoraciones/{id}', 'App\Http\Controllers\Api\ValoracionController@show');
-Route::put('/valoraciones/{id}', 'App\Http\Controllers\Api\ValoracionController@update');
-Route::delete('/valoraciones/{id}', 'App\Http\Controllers\Api\ValoracionController@destroy');
+// Rutas para ValoracionController
+Route::get('/valoraciones', [ValoracionController::class, 'index']);
+Route::post('/valoraciones', [ValoracionController::class, 'store']);
+Route::get('/valoraciones/{id}', [ValoracionController::class, 'show']);
+Route::put('/valoraciones/{id}', [ValoracionController::class, 'update']);
+Route::delete('/valoraciones/{id}', [ValoracionController::class, 'destroy']);

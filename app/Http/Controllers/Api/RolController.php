@@ -11,16 +11,19 @@ class RolController extends Controller
     public function index()
     {
         $roles = Rol::all();
-        return response()->json(['message' => 'Listado de países']);
+        return response()->json($roles);
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nombre_rol' => 'required|max:50',
+        $validatedData = $request->validate([
+            'nombre_rol' => 'required|string|max:50',
         ]);
 
-        $rol = Rol::create($request->all());
+        $rol = new Rol();
+        $rol->nombre_rol = $validatedData['nombre_rol'];
+        $rol->save();
+
         return response()->json($rol, 201);
     }
 
@@ -32,12 +35,16 @@ class RolController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nombre_rol' => 'max:50',
+        $validatedData = $request->validate([
+            'nombre_rol' => 'sometimes|required|string|max:50',
         ]);
 
         $rol = Rol::findOrFail($id);
-        $rol->update($request->all());
+        if ($request->has('nombre_rol')) {
+            $rol->nombre_rol = $validatedData['nombre_rol'];
+        }
+        $rol->save();
+
         return response()->json($rol);
     }
 

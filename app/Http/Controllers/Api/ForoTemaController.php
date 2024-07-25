@@ -17,9 +17,8 @@ class ForoTemaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_usuario' => 'required|exists:usuarios,id_usuario',
-            'titulo' => 'required|max:200',
-            'estado' => 'in:abierto,cerrado',
+            'titulo' => 'required|string|max:255',
+            'descripcion' => 'required|string',
         ]);
 
         $foroTema = ForoTema::create($request->all());
@@ -34,13 +33,13 @@ class ForoTemaController extends Controller
 
     public function update(Request $request, $id)
     {
+        $foroTema = ForoTema::findOrFail($id);
+
         $request->validate([
-            'id_usuario' => 'exists:usuarios,id_usuario',
-            'titulo' => 'max:200',
-            'estado' => 'in:abierto,cerrado',
+            'titulo' => 'string|max:255',
+            'descripcion' => 'string',
         ]);
 
-        $foroTema = ForoTema::findOrFail($id);
         $foroTema->update($request->all());
         return response()->json($foroTema);
     }

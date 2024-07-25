@@ -17,13 +17,8 @@ class ExperienciaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_usuario' => 'required|exists:usuarios,id_usuario',
-            'id_destino' => 'required|exists:destinos,id_destino',
-            'titulo' => 'required|max:200',
-            'fecha_inicio_viaje' => 'date',
-            'fecha_fin_viaje' => 'date|after_or_equal:fecha_inicio_viaje',
-            'estado' => 'in:borrador,publicado,archivado',
-            'votos_positivos' => 'integer|min:0',
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string',
         ]);
 
         $experiencia = Experiencia::create($request->all());
@@ -38,17 +33,13 @@ class ExperienciaController extends Controller
 
     public function update(Request $request, $id)
     {
+        $experiencia = Experiencia::findOrFail($id);
+
         $request->validate([
-            'id_usuario' => 'exists:usuarios,id_usuario',
-            'id_destino' => 'exists:destinos,id_destino',
-            'titulo' => 'max:200',
-            'fecha_inicio_viaje' => 'date',
-            'fecha_fin_viaje' => 'date|after_or_equal:fecha_inicio_viaje',
-            'estado' => 'in:borrador,publicado,archivado',
-            'votos_positivos' => 'integer|min:0',
+            'nombre' => 'string|max:255',
+            'descripcion' => 'string',
         ]);
 
-        $experiencia = Experiencia::findOrFail($id);
         $experiencia->update($request->all());
         return response()->json($experiencia);
     }

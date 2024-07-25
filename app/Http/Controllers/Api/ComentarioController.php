@@ -34,13 +34,14 @@ class ComentarioController extends Controller
 
     public function update(Request $request, $id)
     {
+        $comentario = Comentario::findOrFail($id);
+
         $request->validate([
             'id_experiencia' => 'exists:experiencias,id_experiencia',
             'id_usuario' => 'exists:usuarios,id_usuario',
             'contenido' => 'required',
         ]);
 
-        $comentario = Comentario::findOrFail($id);
         $comentario->update($request->all());
         return response()->json($comentario);
     }

@@ -17,9 +17,9 @@ class ForoRespuestaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_foro_tema' => 'required|exists:foro_temas,id_foro_tema',
+            'id_tema' => 'required|exists:foro_temas,id_tema',
             'id_usuario' => 'required|exists:usuarios,id_usuario',
-            'contenido' => 'required',
+            'contenido' => 'required|string',
         ]);
 
         $foroRespuesta = ForoRespuesta::create($request->all());
@@ -34,13 +34,14 @@ class ForoRespuestaController extends Controller
 
     public function update(Request $request, $id)
     {
+        $foroRespuesta = ForoRespuesta::findOrFail($id);
+
         $request->validate([
-            'id_foro_tema' => 'exists:foro_temas,id_foro_tema',
+            'id_tema' => 'exists:foro_temas,id_tema',
             'id_usuario' => 'exists:usuarios,id_usuario',
-            'contenido' => 'required',
+            'contenido' => 'string',
         ]);
 
-        $foroRespuesta = ForoRespuesta::findOrFail($id);
         $foroRespuesta->update($request->all());
         return response()->json($foroRespuesta);
     }
