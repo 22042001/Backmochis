@@ -1,10 +1,9 @@
 <?php
 
 return [
-
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'api'),
-        'passwords' => env('AUTH_PASSWORD_BROKER', 'usuarios'),
+        'guard' => 'api',
+        'passwords' => 'usuarios',
     ],
 
     'guards' => [
@@ -29,12 +28,11 @@ return [
     'passwords' => [
         'usuarios' => [
             'provider' => 'usuarios',
-            'table' => 'password_reset_tokens',
+            'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],
     ],
 
     'password_timeout' => 10800,
-
 ];
