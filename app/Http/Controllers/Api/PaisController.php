@@ -17,11 +17,10 @@ class PaisController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required|string|max:255',
-            'codigo' => 'required|string|max:3',
+            'nombre_pais' => 'required|string|max:100',
         ]);
 
-        $pais = Pais::create($request->all());
+        $pais = Pais::create($request->only('nombre_pais'));
         return response()->json($pais, 201);
     }
 
@@ -36,11 +35,10 @@ class PaisController extends Controller
         $pais = Pais::findOrFail($id);
 
         $request->validate([
-            'nombre' => 'string|max:255',
-            'codigo' => 'string|max:3',
+            'nombre_pais' => 'string|max:100',
         ]);
 
-        $pais->update($request->all());
+        $pais->update($request->only('nombre_pais'));
         return response()->json($pais);
     }
 

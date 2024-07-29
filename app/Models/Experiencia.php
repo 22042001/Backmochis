@@ -11,7 +11,7 @@ class Experiencia extends Model
 
     protected $fillable = [
         'id_usuario', 'id_destino', 'titulo', 'descripcion',
-        'fecha_inicio_viaje', 'fecha_fin_viaje', 'estado', 'votos_positivos'
+        'fecha_inicio_viaje', 'fecha_fin_viaje', 'estado', 'votos_positivos', 'fotos'
     ];
 
     public function usuario()
