@@ -5,12 +5,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up()
     {
         Schema::create('experiencias', function (Blueprint $table) {
@@ -23,7 +19,7 @@ return new class extends Migration
             $table->enum('estado', ['borrador', 'publicado', 'archivado'])->default('borrador');
             $table->integer('votos_positivos')->default(0);
             $table->timestamp('fecha_actualizacion')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->binary('fotos')->nullable();
+            $table->string('fotos')->nullable();  // Cambia de binary a string
             $table->unsignedBigInteger('id_usuario');
             $table->unsignedBigInteger('id_destino');
             $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
@@ -31,11 +27,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-    
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('experiencias');

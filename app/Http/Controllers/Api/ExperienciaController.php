@@ -18,7 +18,6 @@ class ExperienciaController extends Controller
 
     public function store(Request $request)
     {
-        // Log the request data
         Log::info('Request data for store:', ['data' => $request->all()]);
 
         $validatedData = $request->validate([
@@ -43,12 +42,10 @@ class ExperienciaController extends Controller
 
             $experiencia->save();
 
-            // Log successful creation
             Log::info('Experiencia created successfully.', ['experiencia' => $experiencia->toArray()]);
 
             return response()->json($experiencia, 201);
         } catch (\Exception $e) {
-            // Log the error
             Log::error('Error creating experiencia:', ['error' => $e->getMessage()]);
             return response()->json(['error' => 'Error creating experiencia', 'details' => $e->getMessage()], 500);
         }
@@ -62,7 +59,6 @@ class ExperienciaController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Log the request data
         Log::info('Request data for update:', ['data' => $request->all()]);
 
         $experiencia = Experiencia::findOrFail($id);
@@ -93,12 +89,10 @@ class ExperienciaController extends Controller
 
             $experiencia->save();
 
-            // Log successful update
             Log::info('Experiencia updated successfully.', ['experiencia' => $experiencia->toArray()]);
 
             return response()->json($experiencia);
         } catch (\Exception $e) {
-            // Log the error
             Log::error('Error updating experiencia:', ['error' => $e->getMessage()]);
             return response()->json(['error' => 'Error updating experiencia', 'details' => $e->getMessage()], 500);
         }
@@ -115,14 +109,12 @@ class ExperienciaController extends Controller
 
             $experiencia->delete();
 
-            // Log successful deletion
             Log::info('Experiencia deleted successfully.', ['id' => $id]);
 
             return response()->json(null, 204);
         } catch (\Exception $e) {
-            // Log the error
             Log::error('Error deleting experiencia:', ['error' => $e->getMessage()]);
-            return response()->json(['error' => 'Error deleting experiencia', 'details' => $e->getMessage()], 500);
+            return response()->json(['error' => 'Error deleting experiencia', 'details' => e->getMessage()], 500);
         }
     }
 }
